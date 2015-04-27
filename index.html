@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Countdown Timer Example</title>
+	<meta name="description" content="Countdown Timer Example">
+	<meta name="author" content="Marcus Feital">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        .cdt--widget {
+            border: 1px solid #bbb;
+            color: #333; 
+            margin: 20px auto 0;
+            padding: 20px;
+            text-align: center;
+            width: 310px;
+        }
+        .cdt--widget h1 {
+            margin: 0;
+            padding: 0;
+        }
+        .cdt--widget .cdt--elements {
+            margin-top: 10px;
+        }
+        .cdt--widget .cdt--itens {
+            display: inline-block;
+            margin: 5px 10px;
+            text-align: center;
+            position: relative;
+            width: 52px;
+        }
+             .cdt--widget .cdt--itens:after {
+                  content: ':';
+                  font-size: 2em;
+                  position: absolute;
+                  top: 0;
+                  right: -15px;
+            }
+             .cdt--widget .cdt--itens:last-of-type:after {
+                  display: none;
+            } 
+        .cdt--widget .cdt--number_box {
+            display: block;           
+            font-size: 2em;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+
+	<section>
+        <!-- Example HTML for the timer. IDs are important and should be kept, everything else can change. -->
+        <div id="countdown_timer" class="cdt--widget">
+            <h1>Countdown Timer</h1>
+            <div class="cdt--elements">
+                <div class="cdt--itens">
+                    <span id="cdt--days" class="cdt--number_box">--</span>
+                    <span class="counter--label">Days</span>
+                </div>
+                <div class="cdt--itens">
+                    <span id="cdt--hours" class="cdt--number_box">--</span>
+                    <span class="cdt--label">Hours</span>
+                </div>
+                <div class="cdt--itens">
+                    <span id="cdt--minutes" class="cdt--number_box">--</span>
+                    <span class="cdt--label">Minutes</span>
+                </div>
+                <div class="cdt--itens">    
+                    <span id="cdt--seconds" class="cdt--number_box">--</span>
+                    <span class="cdt--label">Seconds</span>
+                </div>
+            </div>
+        </div>
+	</section>
+
+    <script src="js/countdown-timer.js"></script>
+</body>
+</html>
