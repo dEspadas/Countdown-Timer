@@ -1,45 +1,30 @@
-/* Example for a custom target date in 28, April, 2016 */
-
-var cdt_widget = {};
-
-var cdt_config = (function () {
-    "use strict";
-    /*jslint browser: true */
-
-    var hasCountdownTimer,
-        cdt_config_year,
-        cdt_config_month,
-        cdt_config_day;
-
-    if (document.querySelector('#countdown_timer')) {
-        hasCountdownTimer = true; 
-    } else {
-        hasCountdownTimer = false;              
-    }
-    
-    if (hasCountdownTimer) {
-        cdt_config_year = 2016,
-        cdt_config_month = 3,
-        cdt_config_day = 28;
-    }
-    
-    return {
-        hasCountdownTimer: hasCountdownTimer,
-        cdt_config_year: cdt_config_year,
-        cdt_config_month: cdt_config_month,
-        cdt_config_day: cdt_config_day
-    }
-    
-}());
-
-(function (cw_ns, config_vars) {
+(function () {
     "use strict";
     /*jslint browser: true */
     
-    if(!config_vars.hasCountdownTimer)
+	var _element = document.querySelector('#countdown_timer');
+	
+	if(!_element)
         return;
-    
-    var targetDate = new Date(config_vars.cdt_config_year, config_vars.cdt_config_month, config_vars.cdt_config_day),
+	
+	var _cdt_config = {
+			_year: _element.dataset.cdtYear,
+			_month: _element.dataset.cdtMonth,
+			_day: _element.dataset.cdtDay
+	};
+   
+    //Set time style
+    _element.innerHTML ="<style>#countdown_timer .cdt--itens {display: inline-block;margin: 5px 10px;text-align: center;position: relative;width: 52px;}#countdown_timer .cdt--itens:after {content: ':';font-size: 2em;position: absolute;top: 0;right: -15px;}#countdown_timer .cdt--itens:last-of-type:after {display: none;} #countdown_timer .cdt--number_box {display: block;font-size: 2em;font-weight: 800;}</style>";
+	
+	//Append time html elements
+    _element.innerHTML +="<div class=\"cdt--itens\"><span id=\"cdt--days\" class=\"cdt--number_box\">--</span><span class=\"cdt--label\">Days</span></div>";
+    _element.innerHTML +="<div class=\"cdt--itens\"><span id=\"cdt--hours\" class=\"cdt--number_box\">--</span><span class=\"cdt--label\">Hours</span></div>";
+    _element.innerHTML +="<div class=\"cdt--itens\"><span id=\"cdt--minutes\" class=\"cdt--number_box\">--</span><span class=\"cdt--label\">Minutes</span></div>";
+    _element.innerHTML +="<div class=\"cdt--itens\"><span id=\"cdt--seconds\" class=\"cdt--number_box\">--</span><span class=\"cdt--label\">Seconds</span></div>";
+
+	
+	//Set Target date
+    var targetDate = new Date(_cdt_config._year, _cdt_config._month, _cdt_config._day),
         dateHtmlElements = {
             elementDays: document.getElementById('cdt--days'),
             elementHours: document.getElementById('cdt--hours'),
@@ -67,10 +52,12 @@ var cdt_config = (function () {
         dateHtmlElements.elementHours.innerHTML = timeToTarget.hoursLeft < 10 ? '0' + timeToTarget.hoursLeft : timeToTarget.hoursLeft;
         dateHtmlElements.elementMinutes.innerHTML = timeToTarget.minutesLeft < 10 ? '0' + timeToTarget.minutesLeft : timeToTarget.minutesLeft;
         dateHtmlElements.elementSeconds.innerHTML = timeToTarget.secondsLeft < 10 ? '0' + timeToTarget.secondsLeft : timeToTarget.secondsLeft;
-    }
+    };
     
-        
-    _countdownTimer(); //To make the counter works at t = 0, will be fixed later.
-    setInterval(_countdownTimer, 1000);
-    
-}(cdt_widget, cdt_config));
+    function main() {   
+		_countdownTimer(); //To make the counter works at t = 0, will be fixed later.
+		setInterval(_countdownTimer, 1000);
+	}
+	
+	return main;
+}()());
