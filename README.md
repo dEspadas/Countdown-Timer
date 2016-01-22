@@ -3,7 +3,7 @@
 Countdown Timer is a simple javascript timer. Set the target date in the your container and you are good to go.
 
 ### Version
-0.1
+1.0
 
 
 ### Configuration
